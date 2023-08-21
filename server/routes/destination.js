@@ -189,5 +189,5 @@ router.delete("/remove/:id", verifyToken, async (req, res) => {
 });
 
 export {
-  router as destinationRoutes,
+  router as destinationRoutes
 };
