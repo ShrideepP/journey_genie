@@ -20,6 +20,10 @@ cloudinary.config({
 app.use(express.json());
 app.use(cors());
 
+app.get('/', (req, res) => {
+  res.status(200).json({ message: "Hey, what's up?" });
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/destination', destinationRoutes);
 
