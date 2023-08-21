@@ -7,7 +7,7 @@ import DestinationModel from "../model/destination.model.js";
 
 const router = express.Router();
 
-router.get('/', verifyToken, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const destinations = await DestinationModel.find({ category: "normal" });
     res.status(200).json(destinations);
@@ -17,7 +17,7 @@ router.get('/', verifyToken, async (req, res) => {
   };
 });
 
-router.get('/featured', verifyToken, async (req, res) => {
+router.get('/featured', async (req, res) => {
   try {
     const destinations = await DestinationModel.find({ category: "featured" });
     res.status(200).json(destinations);
@@ -27,7 +27,7 @@ router.get('/featured', verifyToken, async (req, res) => {
   };
 });
 
-router.get('/filter', verifyToken, async (req, res) => {
+router.get('/filter', async (req, res) => {
   try {
     const {
       temperature,
