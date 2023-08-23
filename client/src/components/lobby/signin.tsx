@@ -1,35 +1,40 @@
-"use client"
+"use client";
 
-import {
-  Dialog,
+import { 
+  Dialog, 
   DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
-  DialogFooter,
 } from "@/components/ui/dialog";
-import { 
+import {
   Form,
+  FormControl,
   FormField,
   FormItem,
-  FormLabel,
-  FormControl,
-  FormDescription,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form";
+
 import * as z from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string(),
+  email: z.string()
+    .nonempty({ 
+      message: "Email is required!" 
+    })
+    .email(),
+  password: z.string()
+    .nonempty({ 
+      message: "Password is required!" 
+    }),
 });
 
-const SignIn = () => {
+export default function Signin() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,9 +42,8 @@ const SignIn = () => {
       password: "",
     },
   });
- 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
   };
 
   return (
@@ -49,9 +53,9 @@ const SignIn = () => {
           Admin
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent>
         <DialogHeader>
-          <DialogTitle>
+          <DialogTitle className="text-xl">
             Admin Login
           </DialogTitle>
           <DialogDescription>
@@ -59,16 +63,13 @@ const SignIn = () => {
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form noValidate onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
               <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
-                      Email
-                    </FormLabel>
                     <FormControl>
                       <Input 
                         placeholder="admin@journeygenie.com" 
@@ -84,12 +85,9 @@ const SignIn = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
-                      Password
-                    </FormLabel>
                     <FormControl>
                       <Input 
-                        placeholder="trustme" 
+                        placeholder="123456" 
                         {...field} 
                       />
                     </FormControl>
@@ -98,16 +96,12 @@ const SignIn = () => {
                 )}
               />
             </div>
-            <DialogFooter>
-              <Button type="submit">
-                Explore Admin Area
-              </Button>
-            </DialogFooter>
+            <Button type="submit">
+              Explore Admin Area
+            </Button>
           </form>
         </Form>
       </DialogContent>
     </Dialog>
   );
 };
-
-export default SignIn;

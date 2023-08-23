@@ -7,12 +7,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
 
 const Filters = () => {
   return (
-    <>
-    <div className='w-full sm:w-fit h-fit p-2 flex flex-col sm:flex-row gap-2 rounded-md bg-muted'>
+    <div className="w-full sm:w-fit h-fit p-2 flex flex-col sm:flex-row items-center gap-2 rounded-md bg-muted">
       <Select>
         <SelectTrigger className="w-full sm:w-[180px]">
           <SelectValue placeholder="Temperature" />
@@ -20,24 +18,24 @@ const Filters = () => {
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Temperature</SelectLabel>
-            <SelectItem value="apple">Hot</SelectItem>
-            <SelectItem value="banana">Warm</SelectItem>
-            <SelectItem value="blueberry">Temperate</SelectItem>
-            <SelectItem value="grapes">Cool</SelectItem>
-            <SelectItem value="pineapple">Cold</SelectItem>
+            <SelectItem value="hot">Hot</SelectItem>
+            <SelectItem value="warm">Warm</SelectItem>
+            <SelectItem value="temperate">Temperate</SelectItem>
+            <SelectItem value="cool">Cool</SelectItem>
+            <SelectItem value="cold">Cold</SelectItem>
           </SelectGroup>
         </SelectContent>
       </Select>
       <Select>
         <SelectTrigger className="w-full sm:w-[180px]">
-          <SelectValue placeholder="Flight Time" />
+          <SelectValue placeholder="Flight Duration" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectLabel>Flight Time</SelectLabel>
-            <SelectItem value="apple">Short Haul</SelectItem>
-            <SelectItem value="banana">Medium Haul</SelectItem>
-            <SelectItem value="blueberry">Long Haul</SelectItem>
+            <SelectLabel>Flight Duration</SelectLabel>
+            <SelectItem value="short-haul">Short Haul</SelectItem>
+            <SelectItem value="medium-haul">Medium Haul</SelectItem>
+            <SelectItem value="long-haul">Long Haul</SelectItem>
           </SelectGroup>
         </SelectContent>
       </Select>
@@ -48,19 +46,15 @@ const Filters = () => {
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Journey Type</SelectLabel>
-            <SelectItem value="apple">Adventurous</SelectItem>
-            <SelectItem value="banana">Relaxing</SelectItem>
-            <SelectItem value="blueberry">Cultural</SelectItem>
-            <SelectItem value="grapes">Nature Exploration</SelectItem>
-            <SelectItem value="pineapple">Romantic</SelectItem>
+            <SelectItem value="adventurous">Adventurous</SelectItem>
+            <SelectItem value="relaxing">Relaxing</SelectItem>
+            <SelectItem value="cultural">Cultural</SelectItem>
+            <SelectItem value="nature-exploration">Nature Exploration</SelectItem>
+            <SelectItem value="romantic">Romantic</SelectItem>
           </SelectGroup>
         </SelectContent>
       </Select>
     </div>
-    <Button size="lg" className="sm:w-fit">
-      Find Your Adventure
-    </Button>
-    </>
   );
 };
 

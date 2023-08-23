@@ -1,19 +1,26 @@
-import { FC } from "react";
+import { Metadata } from "next";
 import NavigationMenu from "@/components/lobby/navigation-menu";
 import Footer from "@/components/lobby/footer";
 
-interface LayoutProps {
+interface LobbyLayoutProps {
   children: JSX.Element;
 };
 
-const Layout: FC<LayoutProps> = ({ children }) => {
-  return (
-    <div className="w-full min-h-screen relative z-0">
-      <NavigationMenu />
-      {children}
-      <Footer />
-    </div>
-  );
+export const metadata: Metadata = {
+  title: 'Journey Genie | Travel Application',
+  description: 'Embark on a Journey Tailored to Your Tastes'
 };
 
-export default Layout;
+export default function LobbyLayout({
+  children
+} : LobbyLayoutProps) {
+  return (
+    <>
+    <NavigationMenu />
+    <main>
+      {children}
+    </main>
+    <Footer />
+    </>
+  );
+};
