@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import Image from "next/image";
 
@@ -26,11 +23,7 @@ export default function FeaturedDestination({
 } : FeaturedDestinationProps) {
   return (
     <div className="min-w-[15rem] w-60 h-80 relative overflow-hidden flex items-end rounded-lg shadow-lg">
-      <motion.div
-        whileHover={{ scale: 1.2 }}
-        transition={{ type: "tween", duration: 0.2 }}
-        className="w-full h-full absolute inset-0 z-0"
-      >
+      <div className="w-full h-full absolute inset-0 z-0">
         <Image 
           src={destination.image.URL}
           alt={destination.name}
@@ -42,7 +35,7 @@ export default function FeaturedDestination({
           className="w-full h-full absolute inset-0" 
           style={{ background: 'linear-gradient(0deg, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%)' }}
         />
-      </motion.div>
+      </div>
       <div className="w-full h-fit p-4 relative z-20 flex flex-col gap-1">
         <h4 className="text-xl text-white font-semibold">
           {destination.name.split(',')[0]}
