@@ -43,7 +43,7 @@ router.get('/filter', async (req, res) => {
     const destinations = await DestinationModel.find(filters);
     
     if(destinations.length === 0) {
-      return res.status(404).send('No matching destinations found');
+      return res.status(404).send('No Match');
     };
 
     res.status(200).json(destinations);
