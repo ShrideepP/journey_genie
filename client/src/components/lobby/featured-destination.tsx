@@ -1,18 +1,5 @@
-import { Button } from "../ui/button";
+import MoreDetails from "@/components/lobby/more-details";
 import Image from "next/image";
-
-interface Destination {
-  _id: string;
-  name: string;
-  description: string;
-  image: {
-    _id: string;
-    URL: string;
-  };
-  temperature: string;
-  flightDuration: string;
-  journeyType: string;
-};
 
 interface FeaturedDestinationProps {
   destination: Destination;
@@ -29,10 +16,10 @@ export default function FeaturedDestination({
           alt={destination.name}
           fill
           sizes="(max-width: 768px) 100vw"
-          className="w-full h-full relative -z-10 object-cover select-none"
+          className="w-full h-full relative -z-10 object-cover select-none rounded-lg"
         />
         <div 
-          className="w-full h-full absolute inset-0" 
+          className="w-full h-full absolute inset-0 rounded-lg" 
           style={{ background: 'linear-gradient(0deg, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%)' }}
         />
       </div>
@@ -43,9 +30,7 @@ export default function FeaturedDestination({
         <p className="mb-1 text-xs md:text-sm text-muted font-normal">
           {destination.description.slice(0, 50) + "..."}
         </p>
-        <Button variant="secondary" size="sm">
-          Learn More
-        </Button>
+        <MoreDetails />
       </div>
     </div>
   );

@@ -21,7 +21,7 @@ export default function NavigationMenu() {
                 </Button>
               </a>
               <a 
-                href=""
+                href="https://api-journey-genie.vercel.app"
                 target="_blank"
               >
                 <Button variant="ghost" size="icon">
