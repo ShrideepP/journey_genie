@@ -33,13 +33,13 @@ export default function Destination({
           />
         </p>
         <div className="flex flex-wrap gap-1">
-          <Badge className="py-1">
+          <Badge className="py-1 font-normal">
             {destination.temperature}
           </Badge>
-          <Badge className="py-1">
+          <Badge className="py-1 font-normal">
             {destination.flightDuration}
           </Badge>
-          <Badge className="py-1">
+          <Badge className="py-1 font-normal">
             {destination.journeyType}
           </Badge>
         </div>
