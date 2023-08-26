@@ -6,7 +6,7 @@ import {
 interface InitialState {
   message: string | null;
   isLoading: boolean;
-  data: Destination | null
+  data: Destination[] | null
 }
 
 const initialState: InitialState = {
@@ -20,13 +20,21 @@ const filterResult = createSlice({
   initialState,
   reducers: {
     setMessage: (state, action: PayloadAction<string>) => {
-      state.message = action.payload;
+      return {
+        message: action.payload,
+        isLoading: false,
+        data: null,
+      };
     },
     toggleIsLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
-    setData: (state, action: PayloadAction<Destination>) => {
-      state.data = action.payload;
+    setData: (state, action: PayloadAction<Destination[]>) => {
+      return {
+        message: null,
+        isLoading: false,
+        data: action.payload
+      };
     },
   },
 });

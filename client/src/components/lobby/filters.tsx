@@ -48,9 +48,10 @@ const Filters = () => {
       });
       const data = await response.json();
       if(response.status === 404 && data.message === "No matching destinations found") {
-        return dispatch(setMessage(data.message));
+        dispatch(setMessage(data.message));
+        return;
       };
-      dispatch(setData(data[0]));
+      dispatch(setData(data));
     } catch (error) {
       throw new Error("Oops! something went wrong.");
     } finally {

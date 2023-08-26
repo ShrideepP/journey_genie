@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="w-full h-20 flex justify-center items-center border-t">
         <p className="text-center text-sm text-muted-foreground font-normal">
           &copy;Journey Genie 2023 | Developed & Designed by
-          <span className="mx-[.15rem]" />
+          {" "}
           <a 
             target="_blank" 
             href="https://github.com/ShrideepP" 
