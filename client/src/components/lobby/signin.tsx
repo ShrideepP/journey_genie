@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -35,6 +36,8 @@ const formSchema = z.object({
 });
 
 export default function Signin() {
+  const { toast } = useToast();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,7 +46,20 @@ export default function Signin() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
+    try {
+      const response = await fetch(`https://api-journey-genie.vercel.app/api/auth/signin`, {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+      console.log(response);
+    } catch (error) {
+      toast({
+        title: "Oops! something went wrong.",
+        variant: "destructive"
+      });
+      console.log(error);
+    };
   };
 
   return (
