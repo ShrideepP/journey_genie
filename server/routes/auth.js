@@ -8,7 +8,7 @@ router.post("/signin", async (req, res) => {
     const { 
       email, 
       password 
-    } = req.body;
+    } = JSON.parse(req.body);
 
     if(!email || !password) {
       return res.status(400).json({ message: "Please fill all the details." });
