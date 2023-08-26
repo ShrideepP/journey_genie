@@ -13,7 +13,7 @@ export default function NavigationMenu() {
           <div className="flex items-center gap-x-2">
             <div className="flex items-center">
               <a 
-                href="https://github.com/ShrideepP"
+                href="https://github.com/ShrideepP/journey_genie"
                 target="_blank"
               >
                 <Button variant="ghost" size="icon">
