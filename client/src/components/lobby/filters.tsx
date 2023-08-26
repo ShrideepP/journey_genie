@@ -46,18 +46,15 @@ const Filters = () => {
       const response = await fetch(`https://api-journey-genie.vercel.app/api/destination/filter?temperature=${temperature}&flightDuration=${flightDuration}&journeyType=${journeyType}`, {
         cache: "no-store"
       });
-
-      if(response.statusText === "No Match" && response.status === 404) {
-        dispatch(setMessage("No matching destinations found"));
-        return;
-      };
-
       const data = await response.json();
+      if(response.status === 404 && data.message === "No matching destinations found") {
+        return dispatch(setMessage(data.message));
+      };
       dispatch(setData(data[0]));
-      dispatch(toggleIsLoading(false));
     } catch (error) {
-      console.log(error);
       throw new Error("Oops! something went wrong.");
+    } finally {
+      dispatch(toggleIsLoading(false));
     };
   };
   
@@ -110,6 +107,7 @@ const Filters = () => {
         </SelectContent>
       </Select>
     </div>
+
     <Button 
       onClick={fetchFilteredDestination}
       disabled={(!temperature || !flightDuration || !journeyType) ? true : false}

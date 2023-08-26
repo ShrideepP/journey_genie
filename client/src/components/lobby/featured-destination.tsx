@@ -20,17 +20,17 @@ export default function FeaturedDestination({
         />
         <div 
           className="w-full h-full absolute inset-0 rounded-lg" 
-          style={{ background: 'linear-gradient(0deg, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%)' }}
+          style={{ background: 'linear-gradient(0deg, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 100%)' }}
         />
       </div>
       <div className="w-full h-fit p-4 relative z-20 flex flex-col gap-1">
         <h4 className="text-xl text-white font-semibold">
           {destination.name.split(',')[0]}
         </h4>
-        <p className="mb-1 text-xs md:text-sm text-muted font-normal">
+        <p className="mb-1 text-sm text-muted font-normal">
           {destination.description.slice(0, 50) + "..."}
         </p>
-        <MoreDetails />
+        <MoreDetails destination={destination} />
       </div>
     </div>
   );

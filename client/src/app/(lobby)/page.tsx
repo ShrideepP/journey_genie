@@ -1,6 +1,8 @@
 import Filters from "@/components/lobby/filters";
+import FilterResult from "@/components/lobby/filter-result";
 import Carousel from "@/components/lobby/carousel";
 import FeaturedDestination from "@/components/lobby/featured-destination";
+import Destination from "@/components/lobby/destination";
 
 const fetchFeaturedDestinations = async () => {
   const response = await fetch(`${process.env.NEXT_BASE_URL}/api/destination/featured`, {
@@ -30,7 +32,7 @@ export default async function Home() {
   return (
     <>
     <section className="w-full h-fit px-4 py-6 sm:px-8 sm:py-8 md:px-12 md:py-10 lg:px-16 lg:py-12 xl:px-20">
-      <div className="w-full h-fit grid md:grid-cols-2">
+      <div className="w-full h-fit grid md:grid-cols-2 gap-y-6">
         <div className="space-y-4">
           <h1 className="flex flex-col gap-2">
             <span className="text-3xl md:text-4xl font-light">
@@ -45,6 +47,7 @@ export default async function Home() {
           </p>
           <Filters />
         </div>
+        <FilterResult />
       </div>
     </section>
 
@@ -81,6 +84,14 @@ export default async function Home() {
             More
           </span>
         </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {moreDestinations?.map((destination: Destination) => (
+            <Destination 
+              key={destination._id} 
+              destination={destination}
+            />
+          ))}
+        </div>
       </div>
     </section>
     </>

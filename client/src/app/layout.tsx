@@ -1,5 +1,6 @@
 import { Poppins } from "next/font/google";
 import ReduxProvider from "@/toolkit/provider";
+import { Toaster } from "@/components/ui/toaster";
 import "@/styles/globals.css";
 
 const poppins = Poppins({
@@ -16,6 +17,7 @@ export default function Layout({
         <ReduxProvider>
           {children}
         </ReduxProvider>
+        <Toaster />
       </body>
     </html>
   );

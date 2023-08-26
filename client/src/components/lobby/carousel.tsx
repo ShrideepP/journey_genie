@@ -32,7 +32,7 @@ export default function Carousel({
       <motion.div 
         drag="x"
         dragConstraints={{ right: 0, left: -width }}
-        className="flex gap-x-6"
+        className="flex gap-x-4"
       >
         {children}
       </motion.div>
