@@ -15,10 +15,13 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { Loader } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from 'next/navigation';
+import { setAuth } from "@/lib/utils";
 
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -36,12 +39,9 @@ const formSchema = z.object({
     }),
 });
 
-export function setAuth(email: string, token: string) {
-  localStorage.setItem("email", email);
-  localStorage.setItem("token", token);
-};
-
 export default function Signin() {
+  const [loading, setLoading] = useState(false);
+
   const { toast } = useToast();
   const { push } = useRouter();
 
@@ -54,6 +54,7 @@ export default function Signin() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setLoading(true);
     try {
       const response = await fetch(`https://api-journey-genie.vercel.app/api/auth/signin`, {
         method: 'POST',
@@ -79,7 +80,8 @@ export default function Signin() {
         description: "Please contact the owner or try again later.",
         variant: "destructive"
       });
-      console.log(error);
+    } finally {
+      setLoading(false);
     };
   };
 
@@ -134,7 +136,8 @@ export default function Signin() {
               />
             </div>
             <Button type="submit">
-              Explore Admin Area
+              {loading && <Loader className="w-4 h-4 mr-2 animate-spin" />}
+              {loading ? "Loading..." : "Explore Admin Area"}
             </Button>
           </form>
         </Form>
