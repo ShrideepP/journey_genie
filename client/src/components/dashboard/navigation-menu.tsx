@@ -11,25 +11,25 @@ import Link from "next/link";
 
 const buttons = [
   {
-    id: 1,
+    id: 0,
     name: "Dashboard",
     Icon: LayoutDashboard,
     URL: "/dashboard"
   },
   {
-    id: 2,
+    id: 1,
     name: "Add New",
     Icon: Plus,
     URL: "/add"
   },
   {
-    id: 3,
+    id: 2,
     name: "Manage",
     Icon: Settings2,
     URL: "/manage"
   },
   {
-    id: 4,
+    id: 3,
     name: "Logout",
     Icon: LogOut,
     URL: "/"
