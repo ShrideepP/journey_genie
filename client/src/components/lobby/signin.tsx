@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from 'next/navigation';
 
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -35,8 +36,14 @@ const formSchema = z.object({
     }),
 });
 
+export function setAuth(email: string, token: string) {
+  localStorage.setItem("email", email);
+  localStorage.setItem("token", token);
+};
+
 export default function Signin() {
   const { toast } = useToast();
+  const { push } = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,16 +53,30 @@ export default function Signin() {
     },
   });
 
-  async function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       const response = await fetch(`https://api-journey-genie.vercel.app/api/auth/signin`, {
-        method: "POST",
-        body: JSON.stringify(data),
+        method: 'POST',
+        body: JSON.stringify(values),
+        headers: {
+          'Content-Type': 'application/json',
+        }
       });
-      console.log(response);
+      
+      if(response.status === 401) {
+        return toast({
+          title: "Invalid credentials!",
+          variant: "destructive",
+        });
+      };
+
+      const data = await response.json();
+      setAuth(data.email, data.token);
+      push("/dashboard");
     } catch (error) {
       toast({
         title: "Oops! something went wrong.",
+        description: "Please contact the owner or try again later.",
         variant: "destructive"
       });
       console.log(error);

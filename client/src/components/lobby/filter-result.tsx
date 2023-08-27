@@ -57,7 +57,7 @@ export default function FilterResult() {
         {data.length > 1 && (
           <div className="w-full md:w-3/5 flex justify-start">
             <p className="text-start text-sm text-destructive font-normal">
-              +{data.length} more results found based on the filters.
+              {data.length - 1} more results found based on the filters.
             </p>
           </div>
         )}
