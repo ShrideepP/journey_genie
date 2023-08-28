@@ -37,7 +37,8 @@ const destinationSchema = new mongoose.Schema({
   "category": {
     type: String,
     enum: ["featured", "normal"],
-    default: "normal" },
+    default: "normal" 
+  },
 }, {
   timestamps: true
 });
