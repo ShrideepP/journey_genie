@@ -4,14 +4,14 @@ import {
   Github,
   ExternalLink
 } from "lucide-react";
-import { getAuth } from "@/lib/utils";
+// import { getAuth } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Signin from "@/components/lobby/signin";
 import Image from "next/image";
 
 export default function NavigationMenu() {
-  const { token } = getAuth();
+  // const { token } = getAuth();
   return (
     <nav className="w-full h-fit px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
       <div className="w-full h-20 flex items-center justify-between border-b">
@@ -36,7 +36,7 @@ export default function NavigationMenu() {
               </Button>
             </a>
           </div>
-          {token ? (
+          {/* {token ? (
             <div>
               <Link href="/dashboard">
                 <Button variant="outline">
@@ -44,7 +44,7 @@ export default function NavigationMenu() {
                 </Button>
               </Link>
             </div>
-          ) : <Signin />}
+          ) : <Signin />} */}
         </div>
       </div>
     </nav>

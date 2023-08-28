@@ -1,3 +1,15 @@
+interface ChildrenProps {
+  children: JSX.Element;
+};
+
+interface User {
+  user?: {
+    name?: string | null | undefined;
+    email?: string;
+  };
+  token?: string;
+};
+
 interface Destination {
   _id: string;
   name: string;
@@ -9,8 +21,4 @@ interface Destination {
   temperature: string;
   flightDuration: string;
   journeyType: string;
-};
-
-interface ChildrenProps {
-  children: JSX.Element;
 };

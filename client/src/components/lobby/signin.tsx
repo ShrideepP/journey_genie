@@ -21,7 +21,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from 'next/navigation';
-import { setAuth } from "@/lib/utils";
+// import { setAuth } from "@/lib/utils";
 
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -72,7 +72,7 @@ export default function Signin() {
       };
 
       const data = await response.json();
-      setAuth(data.email, data.token);
+      // setAuth(data.email, data.token);
       push("/dashboard");
     } catch (error) {
       toast({

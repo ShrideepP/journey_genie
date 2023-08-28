@@ -1,6 +1,6 @@
 import { Poppins } from "next/font/google";
-import ReduxProvider from "@/toolkit/provider";
 import { Toaster } from "@/components/ui/toaster";
+import Providers from "@/components/providers";
 import "@/styles/globals.css";
 
 const poppins = Poppins({
@@ -14,9 +14,9 @@ export default function Layout({
   return (
     <html lang="en">
       <body style={poppins.style} className="w-full h-full antialiased relative z-0 overflow-x-hidden">
-        <ReduxProvider>
+        <Providers>
           {children}
-        </ReduxProvider>
+        </Providers>
         <Toaster />
       </body>
     </html>
