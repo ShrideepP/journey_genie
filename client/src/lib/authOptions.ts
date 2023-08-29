@@ -1,5 +1,5 @@
-import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import type { NextAuthOptions } from "next-auth";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -18,7 +18,7 @@ export const authOptions: NextAuthOptions = {
         },
       },
       async authorize(credentials, req) {
-        const res = await fetch(`${process.env.NEXT_BASE_URL}/api/auth/signin`, {
+        const response = await fetch(`https://api-journey-genie.vercel.app/api/auth/signin`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -28,18 +28,22 @@ export const authOptions: NextAuthOptions = {
             password: credentials?.password,
           })
         });
-
-        const data = await res.json();
-
-        if(res.ok && data) return data;
-
-        else if(res.status === 401 && data.message === "Invalid credentials.") return "Invalid credentails";
-
-        else if(res.status === 401 && data.message === "Incorrect passowrd.") return "Incorrect passowrd.";
-        
-        else return "Oop! something went wrong.";
+        const data = await response.json();
+        if(response.status === 202 && data) return data;
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      return ({ ...token, ...user });
+    },
+    async session({ session, token, user }) {
+      session.user = token;
+      return session;
+    },
+  },
+  pages: {
+    signIn: "/",
+  },
   secret: process.env.NEXT_AUTH_SECRET,
 };

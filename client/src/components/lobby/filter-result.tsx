@@ -3,7 +3,7 @@
 import { useAppSelector } from "@/toolkit/store";
 import { Loader } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import MoreDetails from "./more-details";
+import MoreDetails from "../more-details";
 import Image from "next/image";
 
 export default function FilterResult() {

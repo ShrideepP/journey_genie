@@ -1,8 +1,8 @@
 import Filters from "@/components/lobby/filters";
 import FilterResult from "@/components/lobby/filter-result";
 import Carousel from "@/components/lobby/carousel";
-import FeaturedDestination from "@/components/lobby/featured-destination";
-import Destination from "@/components/lobby/destination";
+import FeaturedDestination from "@/components/featured-destination";
+import Destination from "@/components/destination";
 
 const fetchFeaturedDestinations = async () => {
   const response = await fetch(`${process.env.NEXT_BASE_URL}/api/destination/featured`, {

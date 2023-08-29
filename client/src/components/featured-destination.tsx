@@ -1,4 +1,4 @@
-import MoreDetails from "@/components/lobby/more-details";
+import MoreDetails from "@/components/more-details";
 import Image from "next/image";
 
 interface FeaturedDestinationProps {

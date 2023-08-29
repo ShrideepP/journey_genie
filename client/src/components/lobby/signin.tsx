@@ -15,13 +15,10 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Loader } from "lucide-react";
+import { signIn } from "next-auth/react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { useRouter } from 'next/navigation';
-// import { setAuth } from "@/lib/utils";
 
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -40,10 +37,7 @@ const formSchema = z.object({
 });
 
 export default function Signin() {
-  const [loading, setLoading] = useState(false);
-
   const { toast } = useToast();
-  const { push } = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,34 +48,19 @@ export default function Signin() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setLoading(true);
     try {
-      const response = await fetch(`https://api-journey-genie.vercel.app/api/auth/signin`, {
-        method: 'POST',
-        body: JSON.stringify(values),
-        headers: {
-          'Content-Type': 'application/json',
-        }
+      const { email, password } =  values;
+      const response = await signIn('credentials', {
+        email,
+        password,
       });
-      
-      if(response.status === 401) {
-        return toast({
-          title: "Invalid credentials!",
-          variant: "destructive",
-        });
-      };
-
-      const data = await response.json();
-      // setAuth(data.email, data.token);
-      push("/dashboard");
+      console.log(response);
     } catch (error) {
       toast({
         title: "Oops! something went wrong.",
         description: "Please contact the owner or try again later.",
         variant: "destructive"
       });
-    } finally {
-      setLoading(false);
     };
   };
 
@@ -136,8 +115,7 @@ export default function Signin() {
               />
             </div>
             <Button type="submit">
-              {loading && <Loader className="w-4 h-4 mr-2 animate-spin" />}
-              {loading ? "Loading..." : "Explore Admin Area"}
+              Explore Admin Area
             </Button>
           </form>
         </Form>
