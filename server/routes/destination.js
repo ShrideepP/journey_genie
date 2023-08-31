@@ -28,6 +28,18 @@ router.get('/featured', async (req, res) => {
   };
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const destinationId = req.params.id;
+    const destination = await DestinationModel.findById(destinationId);
+    if(!destination) return res.status(404).json({ message: "Destination not found." });
+    res.status(200).json(destination);
+  } catch (error) {
+    console.log('Error while fetching destination details.', error);
+    res.status(500).json({ message: 'Internal server error.' });
+  };
+});
+
 router.get('/filter', async (req, res) => {
   try {
     const {
