@@ -2,30 +2,25 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import { v2 as cloudinary } from "cloudinary";
-
-dotenv.config();
+import { cloudinaryConfig } from "./config/cloudinaryConfig.js";
 
 import { authRoutes } from "./routes/auth.js";
 import { destinationRoutes } from "./routes/destination.js";
 
-const app = express();
+dotenv.config();
 
-cloudinary.config({ 
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
-  api_key: process.env.CLOUDINARY_API_KEY, 
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use('*', cloudinaryConfig);
+
+app.use('/api/auth', authRoutes);
+app.use('/api/destination', destinationRoutes);
 
 app.get('/', (req, res) => {
   res.status(200).json({ message: "Hey, what's up?" });
 });
-
-app.use('/api/auth', authRoutes);
-app.use('/api/destination', destinationRoutes);
 
 mongoose.connect(process.env.MONGODB_DATABASE_URL, {
   useNewUrlParser: true,

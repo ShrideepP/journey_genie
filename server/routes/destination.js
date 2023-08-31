@@ -1,7 +1,8 @@
 import express from "express";
-import upload from "../middleware/multerUpload.js";
 import verifyToken from "../middleware/verifyToken.js";
-import { v2 as cloudinary } from "cloudinary";
+
+import { uploader } from "../config/cloudinaryConfig.js";
+import { multerUploads, dataUri } from "../middleware/multerUpload.js";
 
 import DestinationModel from "../model/destination.model.js";
 
@@ -53,7 +54,7 @@ router.get('/filter', async (req, res) => {
   };
 });
 
-router.post('/create', verifyToken, upload.single('image'), async (req, res) => {
+router.post('/create', verifyToken, multerUploads, async (req, res) => {
   try {
     const {
       name,
@@ -68,11 +69,14 @@ router.post('/create', verifyToken, upload.single('image'), async (req, res) => 
       return res.status(400).json({ message: "Please fill all the details." });
     };
 
-    const result = await cloudinary.uploader.upload(req.file.path);
+    const file = dataUri(req).content;
+    const cloudinaryResponse = await uploader.upload(file, {
+      resource_type: 'image'
+    });
 
     const image = {
-      _id: result.public_id,
-      URL: result.secure_url,
+      _id: cloudinaryResponse.public_id,
+      URL: cloudinaryResponse.secure_url,
     };
 
     const destination = new DestinationModel({
@@ -93,7 +97,7 @@ router.post('/create', verifyToken, upload.single('image'), async (req, res) => 
   };
 });
 
-router.put('/edit/:id', verifyToken, upload.single('image'), async (req, res) => {
+router.put('/edit/:id', verifyToken, multerUploads, async (req, res) => {
   try {
     const destinationId = req.params.id;
     const {
@@ -113,10 +117,13 @@ router.put('/edit/:id', verifyToken, upload.single('image'), async (req, res) =>
 
     if(req.file) {
       if (destination.image && destination.image._id) {
-        await cloudinary.uploader.destroy(destination.image._id);
+        await uploader.destroy(destination.image._id);
       };
 
-      const cloudinaryResponse = await cloudinary.uploader.upload(req.file.path);
+      const file = dataUri(req).content;
+      const cloudinaryResponse = await uploader.upload(file, {
+        resource_type: 'image'
+      });
 
       const image = {
         _id: cloudinaryResponse.public_id,
@@ -177,7 +184,7 @@ router.delete("/remove/:id", verifyToken, async (req, res) => {
     };
 
     if(destination.image && destination.image._id) {
-      await cloudinary.uploader.destroy(destination.image._id);
+      await uploader.destroy(destination.image._id);
     };
 
     await DestinationModel.findByIdAndDelete(destinationId);
