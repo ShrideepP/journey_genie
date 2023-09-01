@@ -28,7 +28,7 @@ router.get('/featured', async (req, res) => {
   };
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/details/:id', async (req, res) => {
   try {
     const destinationId = req.params.id;
     const destination = await DestinationModel.findById(destinationId);
