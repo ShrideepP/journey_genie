@@ -1,7 +1,7 @@
 "use client";
 
 import { Drawer } from "vaul";
-import { Badge } from "./ui/badge";
+import { Badge } from "../ui/badge";
 
 interface MoreDetailsProps {
   destination: Destination;

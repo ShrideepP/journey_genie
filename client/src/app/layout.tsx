@@ -12,8 +12,8 @@ export default function Layout({
   children
 } : ChildrenProps) {
   return (
-    <html lang="en">
-      <body style={poppins.style} className="w-full h-full antialiased relative z-0 overflow-x-hidden">
+    <html lang="en" style={poppins.style}>
+      <body style={{ paddingLeft: 'calc(100vw - 100%)' }} className="w-screen h-full antialiased relative z-0 overflow-x-hidden">
         <Providers>
           {children}
         </Providers>

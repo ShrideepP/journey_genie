@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   Select,
   SelectContent,
@@ -20,8 +21,8 @@ import {
   AppDispatch 
 } from "@/toolkit/store";
 import { Loader2 } from "lucide-react"
-import { useDispatch } from "react-redux";
 import { Button } from "@/components/ui/button";
+import { API_REQUESTS } from "@/lib/requests";
 
 const Filters = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -43,7 +44,7 @@ const Filters = () => {
   const fetchFilteredDestination = async () => {
     dispatch(toggleIsLoading(true));
     try {
-      const response = await fetch(`https://api-journey-genie.vercel.app/api/destination/filter?temperature=${temperature}&flightDuration=${flightDuration}&journeyType=${journeyType}`, {
+      const response = await fetch(API_REQUESTS.filterDestinations(temperature, flightDuration, journeyType), {
         cache: "no-store"
       });
       const data = await response.json();
@@ -52,6 +53,7 @@ const Filters = () => {
         return;
       };
       dispatch(setData(data));
+      console.log(data);
     } catch (error) {
       throw new Error("Oops! something went wrong.");
     } finally {

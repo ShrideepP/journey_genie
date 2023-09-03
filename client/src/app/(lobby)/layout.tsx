@@ -3,8 +3,8 @@ import NavigationMenu from "@/components/lobby/navigation-menu";
 import Footer from "@/components/lobby/footer";
 
 export const metadata: Metadata = {
-  title: 'Journey Genie | Travel Application',
-  description: 'Embark on a Journey Tailored to Your Tastes'
+  title: "Discover Your Next Adventure | Journey Genie",
+  description: "Explore the world's most exciting destinations with Journey Genie. Plan your dream getaway, discover hidden gems, and embark on unforgettable journeys. Start your adventure today!"
 };
 
 export default function LobbyLayout({

@@ -1,14 +1,11 @@
 "use client";
 
-import {
-  Github,
-  ExternalLink
-} from "lucide-react";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Icons } from "@/components/icons";
 import Signin from "@/components/lobby/signin";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function NavigationMenu() {
   const { data: session } = useSession();
@@ -28,12 +25,12 @@ export default function NavigationMenu() {
           <div className="flex items-center">
             <a href="https://github.com/ShrideepP/journey_genie" target="_blank">
               <Button variant="ghost" size="icon">
-                <Github className="w-4 h-4" />
+                <Icons.github className="w-4 h-4" />
               </Button>
             </a>
             <a href="https://api-journey-genie.vercel.app/" target="_blank">
               <Button variant="ghost" size="icon">
-                <ExternalLink className="w-4 h-4" />
+                <Icons.externalLink className="w-4 h-4" />
               </Button>
             </a>
           </div>

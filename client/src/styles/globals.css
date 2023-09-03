@@ -72,12 +72,13 @@
   * {
     @apply border-border;
   }
+
+  html {
+    scrollbar-gutter: stable;
+  } 
   
   body {
     @apply bg-background text-foreground;
-  }
-
-  ::-webkit-scrollbar {
-    display: none;
+    overflow-y: scroll;
   }
 }

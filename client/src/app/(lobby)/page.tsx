@@ -1,22 +1,24 @@
 import Filters from "@/components/lobby/filters";
 import FilterResult from "@/components/lobby/filter-result";
 import Carousel from "@/components/lobby/carousel";
-import FeaturedDestination from "@/components/featured-destination";
-import Destination from "@/components/destination";
+import FeaturedDestination from "@/components/lobby/featured-destination";
+import Destination from "@/components/lobby/destination";
+
+import { API_REQUESTS } from "@/lib/requests";
 
 const fetchFeaturedDestinations = async () => {
-  const response = await fetch(`${process.env.NEXT_BASE_URL}/api/destination/featured`, {
+  const response = await fetch(API_REQUESTS.featuredDestinations, {
     cache: "no-store",
   });
-  if(!response.ok) throw new Error('Oops! error while fecthing destinations.');
+  if(!response.ok) throw new Error('Oops! something went wrong.');
   return await response.json();
 };
 
 const fetchMoreDestinations = async () => {
-  const response = await fetch(`${process.env.NEXT_BASE_URL}/api/destination`, {
+  const response = await fetch(API_REQUESTS.moreDestinations, {
     cache: "no-store",
   });
-  if(!response.ok) throw new Error('Oops! error while fecthing destinations.');
+  if(!response.ok) throw new Error('Oops! something went wrong.');
   return await response.json();
 };
 
@@ -84,7 +86,7 @@ export default async function Home() {
             More
           </span>
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {moreDestinations?.map((destination: Destination) => (
             <Destination 
               key={destination._id} 
