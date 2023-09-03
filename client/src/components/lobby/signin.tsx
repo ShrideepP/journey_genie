@@ -13,6 +13,7 @@ import {
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { signIn } from "next-auth/react";
@@ -88,6 +89,7 @@ export default function Signin() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
+                    <FormLabel>Email: admin@journeygenie.com</FormLabel>
                     <FormControl>
                       <Input 
                         placeholder="admin@journeygenie.com" 
@@ -103,9 +105,10 @@ export default function Signin() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
+                    <FormLabel>Password: admin@123</FormLabel>
                     <FormControl>
                       <Input 
-                        placeholder="123456" 
+                        placeholder="admin@123" 
                         {...field} 
                       />
                     </FormControl>
