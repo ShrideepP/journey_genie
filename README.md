@@ -88,6 +88,6 @@ We welcome contributions! If you'd like to contribute to this project, please re
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is not licensed and is provided for demonstration and educational purposes only. You do not have permission to use, modify, or distribute this code for any other purposes.
 
 Happy coding!
